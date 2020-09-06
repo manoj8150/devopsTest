@@ -29,6 +29,14 @@ pipeline{
 		   bat "mvn test"
 		  }
 		}
+		stage('Sonar analysis'){
+		steps{
+		   withSonarQubeEnv("Test_Sonar")
+		   {
+			 bat "mvn sonar:sonar"
+		   }
+		  }
+	  }
 	  stage('Upload to artifactory'){
 		steps{
 			rtMavenDeployer(
