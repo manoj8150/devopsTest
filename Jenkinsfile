@@ -39,7 +39,7 @@ pipeline{
 			)
 			rtMavenRun (
 	          pom: 'pom.xml',
-	          goals: 'clean clean',
+	          goals: 'clean install',
 	          deployerId: 'deployer',
             )
 			rtPublishBuildInfo(
