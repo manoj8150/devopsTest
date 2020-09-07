@@ -33,7 +33,7 @@ pipeline{
 		steps{
 		   withSonarQubeEnv("Test_Sonar")
 		   {
-			 bat "mvn sonar:sonar"
+			 bat "mvn sonar:sonar -X"
 		   }
 		  }
 	  }
