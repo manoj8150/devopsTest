@@ -55,12 +55,12 @@ pipeline{
 			)
 		}
 	  }
-	}
 	stage('Docker Image'){
 	    steps{
 		    bat 'docker build --network=host --no-cache -t manojkumar/demo-application:%BUILD_NUMBER% -f Dockerfile .'
 		}
 	  }
+	}
 	post {
         always {
             junit 'target/surefire-reports/*.xml'
