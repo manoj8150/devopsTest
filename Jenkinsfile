@@ -57,19 +57,19 @@ pipeline{
 	  }
 	stage('Docker Image'){
 	    steps{
-		    bat 'docker build --network=host --no-cache -t manoj8150/demo-application:%BUILD_NUMBER% -f Dockerfile .'
+		    bat 'docker build --network=host --no-cache -t manoj8150/i_manojkumar05_master:%BUILD_NUMBER% -f Dockerfile .'
 		}
 	  }
 	  stage('Push to DTR'){
 	    steps{
 		    bat 'docker login -u manoj8150 -p Docker@11' 
-		    bat 'docker push manoj8150/demo-application:%BUILD_NUMBER%'
+		    bat 'docker push manoj8150/i_manojkumar05_master:%BUILD_NUMBER%'
 		}
 	  }
 	  stage('Stop Running Container'){
 	    steps{
 		   bat '''
-		   for /f %%i in ('docker ps -aqf "name=^demo-application"') do set containerId=%%i
+		   for /f %%i in ('docker ps -aqf "name=^i_manojkumar05_master"') do set containerId=%%i
            echo %containerId%
            If "%containerId%" == "" (
             echo "No Container running"
@@ -82,7 +82,7 @@ pipeline{
 	  }
 	  stage('Docker Deployment'){
 	    steps{
-		  bat 'docker run -it --name demo-application -d -p 6005:6005 manojkumar/demo-application:%BUILD_NUMBER%'
+		  bat 'docker run -it --name demo-application -d -p 6005:8080 manojkumar/i_manojkumar05_master:%BUILD_NUMBER%'
 		}
 	  }
 	}
