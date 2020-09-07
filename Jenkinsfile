@@ -60,7 +60,6 @@ pipeline{
 		    bat 'docker build --network=host --no-cache -t manojkumar/demo-application:%BUILD_NUMBER% -f Dockerfile .'
 		}
 	  }
-	}
 	  stage('Push to DTR'){
 	    steps{
 		    bat 'docker login -u manoj8150 -p Docker@11' 
