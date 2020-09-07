@@ -74,6 +74,7 @@ pipeline{
            If "%containerId%" == "" (
             echo "No Container running"
 		   )else (
+	    echo "Inside else "
             docker stop %ContainerId%
             docker rm -f %ContainerId%
 		   )
@@ -82,7 +83,7 @@ pipeline{
 	  }
 	  stage('Docker Deployment'){
 	    steps{
-		  bat 'docker run -it --name demo-application -d -p 6005:8080 manoj8150/i_manojkumar05_master:%BUILD_NUMBER%'
+		  bat 'docker run -it --name i_manojkumar05_master -d -p 6005:8080 manoj8150/i_manojkumar05_master:%BUILD_NUMBER%'
 		}
 	  }
 	}
