@@ -61,6 +61,32 @@ pipeline{
 		}
 	  }
 	}
+	  stage('Push to DTR'){
+	    steps{
+		    bat 'docker login -u manoj8150 -p Docker@11' 
+		    bat 'docker push manojkumar/demo-application:%BUILD_NUMBER%'
+		}
+	  }
+	  stage('Stop Running Container'){
+	    steps{
+		   bat '''
+		   for /f %%i in ('docker ps -aqf "name=^demo-application"') do set containerId=%%i
+           echo %containerId%
+           If "%containerId%" == "" (
+            echo "No Container running"
+		   )else (
+            docker stop %ContainerId%
+            docker rm -f %ContainerId%
+		   )
+		   '''
+		}
+	  }
+	  stage('Docker Deployment'){
+	    steps{
+		  bat 'docker run -it --name demo-application -d -p 8080:8080 manojkumar/demo-application:%BUILD_NUMBER%'
+		}
+	  }
+	}
 	post {
         always {
             junit 'target/surefire-reports/*.xml'
