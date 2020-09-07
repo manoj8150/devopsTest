@@ -82,7 +82,7 @@ pipeline{
 	  }
 	  stage('Docker Deployment'){
 	    steps{
-		  bat 'docker run -it --name demo-application -d -p 6005:8080 manojkumar/i_manojkumar05_master:%BUILD_NUMBER%'
+		  bat 'docker run -it --name demo-application -d -p 6005:8080 manoj8150/i_manojkumar05_master:%BUILD_NUMBER%'
 		}
 	  }
 	}
