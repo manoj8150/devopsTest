@@ -60,6 +60,8 @@ pipeline{
 		    bat 'docker build --network=host --no-cache -t manoj8150/i_manojkumar05_master:%BUILD_NUMBER% -f Dockerfile .'
 		}
 	  }
+	stage('Docker containers'){
+		parallel{
 	  stage('Push to DTR'){
 	    steps{
 		    bat 'docker login -u manoj8150 -p Docker@11' 
@@ -81,6 +83,8 @@ pipeline{
 		   '''
 		}
 	  }
+	}
+	}
 	  stage('Docker Deployment'){
 	    steps{
 		  bat 'docker run -it --name i_manojkumar05_master -d -p 6005:8080 manoj8150/i_manojkumar05_master:%BUILD_NUMBER%'
