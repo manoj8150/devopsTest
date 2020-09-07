@@ -29,14 +29,14 @@ pipeline{
 		   bat "mvn test"
 		  }
 		}
-	//	stage('Sonar analysis'){
-	//	steps{
-	//	   withSonarQubeEnv("Test_Sonar")
-	//	   {
-	//		 bat "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
-	//	   }
-	//	  }
-	  //}
+		stage('Sonar analysis'){
+		steps{
+		   withSonarQubeEnv("Test_Sonar")
+		   {
+			 bat "mvn sonar:sonar"
+		   }
+		  }
+	  }
 	  stage('Upload to artifactory'){
 		steps{
 			rtMavenDeployer(
