@@ -29,13 +29,18 @@ pipeline{
 		   bat "mvn test"
 		  }
 		}
-		stage('Sonar analysis'){
-		steps{
-		   withSonarQubeEnv("Test_Sonar")
-		   {
-			 bat "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
-		   }
-		  }
+	//	stage('Sonar analysis'){
+	//	steps{
+	//	   withSonarQubeEnv("Test_Sonar")
+	//	   {
+	//		 bat "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
+	//	   }
+	//	  }
+	  //}
+	stage('Docker Image'){
+	    steps{
+		    bat 'docker build --network=host --no-cache -t manojkumar/demo-application:%BUILD_NUMBER% -f Dockerfile .'
+		}
 	  }
 	  stage('Upload to artifactory'){
 		steps{
